@@ -14,4 +14,4 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   gcePersistentDisk:
     fsType: "ext4"
-    pdName: "ownclouddata-prod-pv-1"
+    pdName: "owncloud-prod-pv-1"

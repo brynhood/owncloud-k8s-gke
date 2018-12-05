@@ -3,7 +3,7 @@ RUN apk add --update mysql-client bash openssh-client gettext  && rm -rf /var/ca
 
 ENV MYSQL_ROOT_PASSWORD=rootthepass
 ENV MYSQL_DATABASE=owncloud
-ENV MYSQL_RW_PASSWORD=damnpasswords
+ENV OWNCLOUD_DB_PASSWORD=damnpasswords
 ENV STARTSCRIPT=/docker-entrypoint/load-structure-testdata.sh
 ENV NAMESPACE=TEST
 

@@ -2,21 +2,21 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: listing
+  name: owncloud
 spec:
-  replicas: 2
+  replicas: 1
   minReadySeconds: 40
   selector:
     matchLabels:
-      app: listing
+      app: owncloud
   template:
     metadata:
       labels:
-        app: listing
+        app: owncloud
     spec:
       containers:
-      - name: listing
-        image: eu.gcr.io/default-itadvantage-21945/github-brynhood-owncloud-k8s-gke:release-owncloud--${APPVERSION}
+      - name: owncloud
+        image: eu.gcr.io/default-itadvantage-21945/github-brynhood-owncloud-k8s-gke:release-owncloud-${APPVERSION}
         volumeMounts:
           - name: shibsecrets
             mountPath: "/secrets"
