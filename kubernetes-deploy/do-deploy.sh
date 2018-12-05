@@ -4,30 +4,11 @@
 # Build Kubernetes yaml files and do the deploy
 #
 # set versions
+# typical stuff for in version files: 
+# export APPVERSION=2.5
+# export MEMLIMIT_DOCKERNAME="10M"
 ###############################################################################
-export MYSQLVERSION=0.22
-export PROMETHEUSVERSION=0.4
-export GRAFANAVERSION=0.10
-export REDISVERSION=0.1
-
-export LISTINGVERSION=2.45
-export NAMESPACE=test
-
-if [ "$NAMESPACE" == "test" ]; then
-    echo -e "\033[0;35m";
-    export BACKUPSCHEDULE="@daily"
-    export MEMREQ_LISTING="80M"
-    export MEMLIMIT_LISTING="200M"
-    export MEMREQ_MYSQL="200M"
-    export MEMLIMIT_MYSQL="350M"
-else
-    echo -e "\033[0;31m";
-    export BACKUPSCHEDULE="0 */4 * * *"
-    export MEMREQ_LISTING="120M"
-    export MEMLIMIT_LISTING="400M"
-    export MEMREQ_MYSQL="450M"
-    export MEMLIMIT_MYSQL="750M"
-fi
+source versions.sh
 ###############################
 # end versions
 ###############################

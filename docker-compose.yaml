@@ -47,7 +47,7 @@ services:
       - backup-owncloud:/var/lib/backup
 
   redis:
-    image: webhippie/redis:latest
+    image: redis/.
     restart: always
     environment:
       - REDIS_DATABASES=1

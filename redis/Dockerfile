@@ -1,0 +1,1 @@
+FROM webhippie/redis:latest

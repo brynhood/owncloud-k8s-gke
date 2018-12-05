@@ -1,0 +1,41 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: eu.gcr.io/numeric-arena-175109/bitbucket-eu-scouts_be-listing:release-mysql-${MYSQLVERSION}
+        volumeMounts:
+          - mountPath: /var/lib/mysql
+            name: mysqldata
+        resources:
+          requests:
+            memory: "${MEMREQ_MYSQL}"
+          limits:
+            memory: "${MEMLIMIT_MYSQL}"
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: envsecrets
+                key: MYSQL_ROOT_PASSWORD
+          - name: MYSQL_RW_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: envsecrets
+                key: MYSQL_RW_PASSWORD
+      volumes:
+        - name: mysqldata
+          persistentVolumeClaim:
+            claimName: mysqldataclaim
