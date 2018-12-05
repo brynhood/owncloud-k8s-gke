@@ -28,11 +28,16 @@ spec:
           limits:
             memory: "${MEMLIMIT_LISTING}"
         env:
-          - name: MYSQL_RW_PASSWORD
+          - name: OWNCLOUD_DB_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: envsecrets
-                key: MYSQL_RW_PASSWORD
+                key: OWNCLOUD_DB_PASSWORD
+          - name: OWNCLOUD_ADMIN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: envsecrets
+                key: OWNCLOUD_ADMIN_PASSWORD
           - name: ENVIRONMENT
             valueFrom:
               secretKeyRef:
