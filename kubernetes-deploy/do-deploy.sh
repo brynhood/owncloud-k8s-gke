@@ -49,9 +49,9 @@ fi
 # run deploy run!
 #############################
 
-echo "releasing to $NAMESPACE of appname $RELEASENAME version $LISTINGVERSION"
+echo "releasing to $NAMESPACE of appname $RELEASENAME version $APPVERSION"
 echo -e "\033[0m"
-git tag release-$RELEASENAME-$LISTINGVERSION
+git tag release-$RELEASENAME-$APPVERSION
 git push --tags
 if [ "$1" != "skip" ]; then
     echo -n "sleeping"

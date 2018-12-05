@@ -1,6 +1,6 @@
 export MYSQLVERSION=0.1
 export REDISVERSION=0.1
-export OWNCLOUDVERSION=0.1
+export APPVERSION=0.2
 export NAMESPACE=prod
 
 if [ "$NAMESPACE" == "test" ]; then
@@ -19,7 +19,7 @@ else
     export MEMLIMIT_MYSQL="750M"
 fi
 
-export LOCALHEALTH="http://localhost"
+export LOCALHEALTH="http://127.0.0.1/login"
 export REMOTEHEALTH="http://www.google.be"
 export REMOTEINDEX="http://www.google.be"
 export REMOTEMETRICS="http://www.google.be"

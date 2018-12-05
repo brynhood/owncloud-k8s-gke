@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: listing
-        image: eu.gcr.io/default-itadvantage-21945/github-brynhood-owncloud-k8s-gke:release-owncloud--${OWNCLOUDVERSION}
+        image: eu.gcr.io/default-itadvantage-21945/github-brynhood-owncloud-k8s-gke:release-owncloud--${APPVERSION}
         volumeMounts:
           - name: shibsecrets
             mountPath: "/secrets"
