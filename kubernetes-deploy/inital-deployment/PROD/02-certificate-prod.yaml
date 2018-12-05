@@ -1,0 +1,19 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: wattandenergy.itadvantage.be
+  namespace: prod
+spec:
+  secretName: wattandenergy.itadvantage.be
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+  - wattandenergy.itadvantage.be
+
+  acme:
+    config:
+    - http01:
+        ingress: external-access-prod
+      domains:
+      - wattandenergy.itadvantage.be

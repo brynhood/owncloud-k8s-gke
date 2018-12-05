@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: mysql
-        image: eu.gcr.io/numeric-arena-175109/bitbucket-eu-scouts_be-listing:release-mysql-${MYSQLVERSION}
+        image: eu.gcr.io/default-itadvantage-21945/github-brynhood-owncloud-k8s-gke:release-mysql-${MYSQLVERSION}
         volumeMounts:
           - mountPath: /var/lib/mysql
             name: mysqldata

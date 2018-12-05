@@ -1,0 +1,23 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: eu.gcr.io/default-itadvantage-21945/github-brynhood-owncloud-k8s-gke:release-redis-${REDISVERSION}
+        resources:
+          requests:
+            memory: "50M"
+          limits:
+            memory: "80M"

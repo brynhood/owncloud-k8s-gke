@@ -1,0 +1,55 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: listing
+spec:
+  replicas: 2
+  minReadySeconds: 40
+  selector:
+    matchLabels:
+      app: listing
+  template:
+    metadata:
+      labels:
+        app: listing
+    spec:
+      containers:
+      - name: listing
+        image: eu.gcr.io/default-itadvantage-21945/github-brynhood-owncloud-k8s-gke:release-owncloud--${OWNCLOUDVERSION}
+        volumeMounts:
+          - name: shibsecrets
+            mountPath: "/secrets"
+          - name: owncloud-data
+            mountPath: "/mnt/data"
+        resources:
+          requests:
+            memory: "${MEMREQ_LISTING}"
+          limits:
+            memory: "${MEMLIMIT_LISTING}"
+        env:
+          - name: MYSQL_RW_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: envsecrets
+                key: MYSQL_RW_PASSWORD
+          - name: ENVIRONMENT
+            valueFrom:
+              secretKeyRef:
+                name: envsecrets
+                key: NAMESPACE
+          - name: MY_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: MY_POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+      volumes:
+        - name: owncloud-data
+          persistentVolumeClaim:
+            claimName: ownclouddataclaim
+        - name: shibsecrets
+          secret:
+            secretName: shibsecrets

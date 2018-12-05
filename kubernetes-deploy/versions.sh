@@ -18,3 +18,9 @@ else
     export MEMREQ_MYSQL="450M"
     export MEMLIMIT_MYSQL="750M"
 fi
+
+export LOCALHEALTH="http://localhost"
+export REMOTEHEALTH="http://www.google.be"
+export REMOTEINDEX="http://www.google.be"
+export REMOTEMETRICS="http://www.google.be"
+export RELEASENAME="owncloud"

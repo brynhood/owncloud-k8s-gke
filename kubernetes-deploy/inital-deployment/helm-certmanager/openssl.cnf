@@ -1,0 +1,25 @@
+[CA_default]
+dir = ca
+certificate = $dir/ca.crt.pem
+private_key = $dir/ca.key.pem
+
+[req]
+req_extensions = v3_ca
+distinguished_name = req_distinguished_name
+
+[req_distinguished_name]
+countryName_default = BE
+stateOrProvinceName_default = Antwerp
+localityName_default = Antwerp
+0.organizationName_default = europascouts.be
+organizationalUnitName_default = IT OPS
+commonName_default = europascouts.be helm certificate authority
+emailAddress_default = support@europascouts.be
+default_md = sha512 # which message digest to use.
+
+[v3_ca]
+basicConstraints = critical,CA:TRUE
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid:always,issuer:always
+keyUsage = cRLSign, keyCertSign
+nsCertType = sslCA,emailCA,objCA

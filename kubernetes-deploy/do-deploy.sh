@@ -35,7 +35,7 @@ fi
 if [ "$1" != "skip" ]; then
     #curl call to localhost container should give 200
     echo -n "testing local container status: "
-    retcode="$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1/health.php?gsuite=1&errors=1)"
+    retcode="$(curl -s -o /dev/null -w '%{http_code}' $LOCALHEALTH)"
     if [ $retcode -ne 200 ]; then
         echo "I got exit code $retcode...so exiting"
         exit -1;
@@ -49,9 +49,9 @@ fi
 # run deploy run!
 #############################
 
-echo "releasing to $NAMESPACE of version $LISTINGVERSION"
+echo "releasing to $NAMESPACE of appname $RELEASENAME version $LISTINGVERSION"
 echo -e "\033[0m"
-git tag release-listing-$LISTINGVERSION
+git tag release-$RELEASENAME-$LISTINGVERSION
 git push --tags
 if [ "$1" != "skip" ]; then
     echo -n "sleeping"
@@ -97,9 +97,9 @@ if [ "$NAMESPACE" == "test" ]; then
 else
     host='listing'
 fi 
-retcode="$(curl -s -o /dev/null -w '%{http_code}' https://$host.europascouts.be/health.php)"
-retIndex="$(curl -s -o /dev/null -w '%{http_code}' https://$host.europascouts.be/index.php)"
-retMetrics="$(curl -s -o /dev/null -w '%{http_code}' https://$host.europascouts.be/health.php?gsuite=1&errors=1)"
+retcode="$(curl -s -o /dev/null -w '%{http_code}' $REMOTEHEALTH)"
+retIndex="$(curl -s -o /dev/null -w '%{http_code}' $REMOTEINDEX)"
+retMetrics="$(curl -s -o /dev/null -w '%{http_code}' $REMOTEMETRICS)"
 
 date="$(date)"
 echo -e "host tested is $host: \n   health is:\t $retcode\n   index is:\t $retIndex\n   metrics is:\t $retMetrics\n all good..bye...clocking of at $date"

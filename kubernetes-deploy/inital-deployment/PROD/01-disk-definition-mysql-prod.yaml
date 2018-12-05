@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+   name: mysqldata-prod
+   labels:
+    app: mysql
+spec:
+  volumeMode: Filesystem
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  gcePersistentDisk:
+    fsType: "ext4"
+    pdName: "mysqldata-prod-pv-1"

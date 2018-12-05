@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: external-access-https-prod
+  namespace: prod
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "100m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "220"
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/session-cookie-name: "route"
+    nginx.ingress.kubernetes.io/session-cookie-hash: "sha1"
+spec:
+  tls:
+    - hosts:
+      - wattandenergy.itadvantage.be
+      secretName: wattandenergy.itadvantage.be
+  rules:
+    - host: wattandenergy.itadvantage.be
+      http:
+        paths:
+          - path: /owncloud/
+            backend:
+              serviceName: owncloud-service
+              servicePort: 80

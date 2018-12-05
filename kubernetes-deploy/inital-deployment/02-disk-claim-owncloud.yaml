@@ -1,0 +1,17 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: ownclouddataclaim
+  labels:
+    app: owncloud
+spec:
+  resources:
+    requests:
+      storage: 500Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ""
+  selector:
+    matchLabels:
+      app: owncloud

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-ingress-controller
+  namespace: default
+data:
+  enable-vts-status: "false"
+  enable-sticky-sessions: "true"
+  http-redirect-code: "301"
+  proxy-body-size: 100m
+  client_max_body_size: 100m
+  body-size: 100m
+  custom-http-errors: 404,415,503
+
